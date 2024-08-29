@@ -16,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('', 'docker-credentials-id') {
+                    docker.withRegistry('', '0d1494df-012e-4867-bc14-3e7ac35ad712') {
                         def app = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
                         app.push()
                     }
