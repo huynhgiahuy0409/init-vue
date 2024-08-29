@@ -1,21 +1,61 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_IMAGE = "my-vue-app-1"
+        NODE_VERSION = "20.16.1"
+    }
+
     stages {
-        stage('Build') {
+        stage('Clone Repository') {
             steps {
-                echo 'Building..'
+                git 'https://github.com/huynhgiahuy0409/init-vue.git'
             }
         }
-        stage('Test') {
+
+        stage('Build Docker Image') {
             steps {
-                echo 'Testing..'
+                script {
+                    docker.withRegistry('', 'docker-credentials-id') {
+                        def app = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
+                        app.push()
+                    }
+                }
             }
         }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    docker.image("${DOCKER_IMAGE}:${env.BUILD_ID}").inside {
+                        sh 'npm install'
+                        sh 'npm run test'
+                    }
+                }
+            }
+        }
+
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                script {
+                    docker.image("${DOCKER_IMAGE}:${env.BUILD_ID}").inside {
+                        sh 'npm run build'
+                    }
+                    // Các bước deploy ứng dụng lên môi trường production hoặc staging
+                }
             }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+        success {
+            echo 'Build and deployment successful!'
+        }
+        failure {
+            echo 'Build failed!'
         }
     }
 }
