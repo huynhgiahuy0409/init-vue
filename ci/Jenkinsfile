@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/huynhgiahuy0409/init-vue.git'
+                git branch: 'main', url: 'https://github.com/huynhgiahuy0409/init-vue.git'
             }
         }
 
