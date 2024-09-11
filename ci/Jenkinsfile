@@ -55,7 +55,7 @@ pipeline {
             echo 'Build and deployment successful!'
         }
         failure {
-            echo 'Build failed!12'
+            echo 'Build failed!123'
         }
     }
 }
