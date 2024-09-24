@@ -1,12 +1,11 @@
 pipeline {
   agent any
   stages {
-    stage('stage 1') {
-      steps {
-        echo 'abc'
-        echo 'def'
-      }
+    stage('Checkout Code') {
+            steps {
+                // Clone code từ nhánh dev
+                git branch: 'main', url: 'https://github.com/huynhgiahuy0409/init-vue.git'
+            }
     }
-
   }
 }
