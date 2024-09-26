@@ -26,11 +26,12 @@ pipeline {
             }
       }
 
-      post {
-        always {
-            // In ra thông báo sau khi hoàn thành pipeline
-            echo 'Pipeline executed successfully!'
-        }
-      }
+  }
+  
+  post {
+    always {
+        // In ra thông báo sau khi hoàn thành pipeline
+        echo 'Pipeline executed successfully!'
+    }
   }
 }
