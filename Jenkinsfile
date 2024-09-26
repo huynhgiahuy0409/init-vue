@@ -19,15 +19,15 @@ pipeline {
     stage('Move to Target Directory') {
             steps {
                 // Tạo thư mục nếu chưa có
-                sh 'mkdir -p ${TARGET_DIR}'
+                sudo 'mkdir -p ${TARGET_DIR}'
 
                 // Sao chép code vào thư mục đích
-                sh 'cp -r * ${TARGET_DIR}'
+                sudo 'cp -r * ${TARGET_DIR}'
             }
       }
 
   }
-  
+
   post {
     always {
         // In ra thông báo sau khi hoàn thành pipeline
