@@ -14,18 +14,18 @@ pipeline {
                 git branch: "${GIT_BRANCH}",
                     url: "${GIT_REPO}"
             }
-    }
-
-    stage('Move to Target Directory') {
-            steps {
-                // Tạo thư mục nếu chưa có
-                sudo 'mkdir -p ${TARGET_DIR}'
-
-                // Sao chép code vào thư mục đích
-                sudo 'cp -r * ${TARGET_DIR}'
-            }
       }
 
+      stage('Build Docker Image') {
+            steps {
+                // Build the Docker image
+                script {
+                    // Change 'your-image-name' to the desired image name
+                    // Change '.' to the path to your Dockerfile if not in the root
+                    def image = docker.build("${IMAGE_NAME}", ".")
+                }
+            }
+      }
   }
 
   post {
