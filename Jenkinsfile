@@ -10,7 +10,7 @@ pipeline {
   stages {
      stage('Checkout Code') {
             steps {
-              echo: "abc"
+              echo 'Build process completed.'
             }
       }
   }
