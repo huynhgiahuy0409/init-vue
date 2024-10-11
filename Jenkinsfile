@@ -8,17 +8,35 @@ pipeline {
         TARGET_DIR = '/projects/huy'
   }
   stages {
-     stage('Checkout Code') {
+        stage('Clone Repository') {
             steps {
-              echo 'Build process completed.'
+                // Clone the Vue.js project from Git
+                git branch: 'main', url: "${GIT_REPO}"
             }
-      }
-  }
+        }
 
-  post {
-    always {
-        // In ra thông báo sau khi hoàn thành pipeline
-        echo 'Pipeline executed successfully!'
+        stage('Install Dependencies') {
+            steps {
+                // Install npm packages required for the project
+                sh 'npm install'
+            }
+        }
+
+        stage('Build Project') {
+            steps {
+                // Run the build command to create the production build
+                sh 'npm run build'
+            }
+        }
     }
-  }
+    
+    post {
+        success {
+            echo 'Vue.js project built successfully!'
+            // (Optional) Add deployment steps here if required
+        }
+        failure {
+            echo 'Build failed.'
+        }
+    }
 }
