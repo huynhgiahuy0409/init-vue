@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Copy the dist folder to the remote server
-                bat "scp -r C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\Init Vue\\dist root@103.37.60.16\\var\\www\\huy" // Use 'sh' for Linux
+                bat "scp -r ./dist root@103.37.60.16:/var/www/huy" // Use 'sh' for Linux
             }
         }
     }
