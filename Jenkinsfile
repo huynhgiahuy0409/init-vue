@@ -28,6 +28,13 @@ pipeline {
                 bat 'npm run build'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                // Copy the dist folder to the remote server
+                bat "scp -r C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\Init Vue\\dist root@103.37.60.16\\var\\www\\huy" // Use 'sh' for Linux
+            }
+        }
     }
     
     post {
