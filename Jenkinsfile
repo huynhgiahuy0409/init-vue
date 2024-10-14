@@ -18,14 +18,14 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Install npm packages required for the project
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Build Project') {
             steps {
                 // Run the build command to create the production build
-                sh 'npm run build'
+                bat 'npm run build'
             }
         }
     }
