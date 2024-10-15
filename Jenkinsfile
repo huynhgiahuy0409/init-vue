@@ -25,7 +25,7 @@ pipeline {
         stage('Build Project') {
             steps {
                 // Run the build command to create the production build
-              dir('E:\Levi\Jenkin\Build') {
+              dir('E:\\Levi\\Jenkin\\Build') {
                   bat 'npm run build'
               }
             }
