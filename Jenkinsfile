@@ -7,14 +7,13 @@ pipeline {
         GIT_BRANCH = 'main'
         TARGET_DIR = '/projects/huy'
         BUILD_PATH = 'E:/Levi/Jenkin/Build'
-        GIT_CREDENTIALS = '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'
   }
   stages {
         stage('Clone Repository') {
             steps {
                 // Clone the Vue.js project from Git
                 dir("${BUILD_PATH}") {
-                  git branch: 'main', credentialsId: "${GIT_CREDENTIALS}", url: "${GIT_REPO}"
+                  git branch: 'main', url: "${GIT_REPO}"
                 }
             }
         }
